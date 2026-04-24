@@ -1,0 +1,38 @@
+-- CREATE NEW WORKLOAD GROUP
+ 
+--======================================================================================
+-- STEP 1: Check if group already exists
+SELECT
+    name,
+    min_percentage_resource,
+    cap_percentage_resource,
+    request_min_resource_grant_percent,
+    request_max_resource_grant_percent
+FROM sys.workload_management_workload_groups
+WHERE name = 'ELT';
+ 
+ 
+--=====================================================================================
+-- STEP 2: Create the workload group
+ 
+
+CREATE WORKLOAD GROUP ELT
+WITH (
+      MIN_PERCENTAGE_RESOURCE            = 0,
+      CAP_PERCENTAGE_RESOURCE            = 10,
+      REQUEST_MIN_RESOURCE_GRANT_PERCENT = 1,
+      REQUEST_MAX_RESOURCE_GRANT_PERCENT = 1
+    );
+ 
+ 
+ 
+--==================================================================================
+-- Step 3: Alter (replace <values> with your targets)
+ALTER WORKLOAD GROUP ELT_Synapse
+WITH (
+    MIN_PERCENTAGE_RESOURCE            = 6,
+    CAP_PERCENTAGE_RESOURCE            = 80,
+    REQUEST_MIN_RESOURCE_GRANT_PERCENT = 0.75,
+	REQUEST_MAX_RESOURCE_GRANT_PERCENT = 0.75
+);
+ 
