@@ -1,0 +1,11 @@
+
+DROP WORKLOAD CLASSIFIER wgc_Sales;
+ 
+ 
+CREATE WORKLOAD CLASSIFIER wgc_Sales
+WITH (
+    WORKLOAD_GROUP = 'ELT',
+    MEMBERNAME     = 'SALES_DATA_READ',
+    IMPORTANCE     = normal
+);
+ 
